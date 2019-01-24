@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Birthday page</title>
+  </head>
+  <body>
+    <% if @birthday %>
+    Happy Birthday, <%= @name %>!
+    <% else %>
+    Your birthday will be in <%= @days_till_birthday %> days
+    <% end %>
+  </body>
+</html>

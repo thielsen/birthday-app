@@ -6,7 +6,11 @@ get '/' do
   erb(:index)
 end
 
-put '/birthday' do
+post '/birthday' do
+  @name = params[:name]
+  @day = params[:day].to_i
+  @month = params[:month].to_i
+  @birthday = true if @month == Time.now.month && @day == Time.now.day
   erb(:birthday)
 end
 
