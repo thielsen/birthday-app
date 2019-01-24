@@ -17,7 +17,7 @@ RSpec.describe Birthday do
     visit('/')
     fill_in "name", :with => "Bob"
     fill_in "day", :with => Date.today.day
-    find(:xpath, '//option[contains(text(), "January")]').select_option
+    select "#{Date::MONTHNAMES[Date.today.month]}", from: 'month'
     click_button "Go!"
     expect(page).to have_content('Happy Birthday')
   end
@@ -26,7 +26,7 @@ RSpec.describe Birthday do
     visit('/')
     fill_in "name", :with => "Bob"
     fill_in "day", :with => Date.today.day + 1
-    find(:xpath, '//option[contains(text(), "January")]').select_option
+    select "#{Date::MONTHNAMES[Date.today.month]}", from: 'month'
     click_button "Go!"
     expect(page).to have_content('1 days')
   end
@@ -35,7 +35,7 @@ RSpec.describe Birthday do
     visit('/')
     fill_in "name", :with => "Bob"
     fill_in "day", :with => Date.today.day - 1
-    find(:xpath, '//option[contains(text(), "January")]').select_option
+    select "#{Date::MONTHNAMES[Date.today.month]}", from: 'month'
     click_button "Go!"
     expect(page).to have_content('364 days')
   end
