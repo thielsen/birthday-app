@@ -14,24 +14,30 @@ RSpec.describe Birthday do
   end
 
   scenario 'confirms entering todays date gives you a happy birthday' do
-    month = Time.now.strftime("%B")
-    p month
     visit('/')
     fill_in "name", :with => "Bob"
-    fill_in "day", :with => Time.now.day
-
+    fill_in "day", :with => Date.today.day
     find(:xpath, '//option[contains(text(), "January")]').select_option
     click_button "Go!"
-    p page.body
+    expect(page).to have_content('Happy Birthday')
   end
 
-  scenario 'confirms entering date gives you correct output' do
+  scenario 'confirms entering tomorrows date gives you 1 day to go' do
     visit('/')
     fill_in "name", :with => "Bob"
-    fill_in "day", :with => 17
-    find(:xpath, '//option[contains(text(), "February")]').select_option
+    fill_in "day", :with => 25
+    find(:xpath, '//option[contains(text(), "January")]').select_option
     click_button "Go!"
-    p page.body
+    expect(page).to have_content('1 days')
+  end
+
+  scenario 'confirms entering yesterdays date gives you 364 day to go' do
+    visit('/')
+    fill_in "name", :with => "Bob"
+    fill_in "day", :with => 23
+    find(:xpath, '//option[contains(text(), "January")]').select_option
+    click_button "Go!"
+    expect(page).to have_content('364 days')
   end
 
 end

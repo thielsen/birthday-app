@@ -5,10 +5,10 @@
     <title>Birthday page</title>
   </head>
   <body>
-    <% if @birthday %>
+    <% if @days_till_birthday == 365 %>
     Happy Birthday, <%= @name %>!
     <% else %>
-    Your birthday will be in <%= @days_till_birthday %> days
+    <%= @name %>, your birthday will be in <%= @days_till_birthday %> days
     <% end %>
   </body>
 </html>
