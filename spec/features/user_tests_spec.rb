@@ -25,7 +25,7 @@ RSpec.describe Birthday do
   scenario 'confirms entering tomorrows date gives you 1 day to go' do
     visit('/')
     fill_in "name", :with => "Bob"
-    fill_in "day", :with => 25
+    fill_in "day", :with => Date.today.day + 1
     find(:xpath, '//option[contains(text(), "January")]').select_option
     click_button "Go!"
     expect(page).to have_content('1 days')
@@ -34,7 +34,7 @@ RSpec.describe Birthday do
   scenario 'confirms entering yesterdays date gives you 364 day to go' do
     visit('/')
     fill_in "name", :with => "Bob"
-    fill_in "day", :with => 23
+    fill_in "day", :with => Date.today.day - 1
     find(:xpath, '//option[contains(text(), "January")]').select_option
     click_button "Go!"
     expect(page).to have_content('364 days')
